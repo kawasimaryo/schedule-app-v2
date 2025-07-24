@@ -1,0 +1,55 @@
+<%# 🚨 全体エラーメッセージ（任意） %>
+<% if @schedule.errors.any? %>
+  <div class="alert alert-danger">
+    <h5 class="alert-heading">入力内容に誤りがあります：</h5>
+    <ul class="mb-0">
+      <% @schedule.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model: @schedule, local: true) do |form| %>
+  <div class="mb-3">
+    <%= form.label :title, 'タイトル', class: 'form-label' %>
+    <%= form.text_field :title, class: 'form-control', maxlength: 20, required: true %>
+    <% if @schedule.errors[:title].any? %>
+      <div class="text-danger small mt-1"><%= @schedule.errors[:title].first %></div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :start_time, '開始日時', class: 'form-label' %>
+    <%= form.text_field :start_time, class: 'form-control datepicker', required: true %>
+    <% if @schedule.errors[:start_time].any? %>
+      <div class="text-danger small mt-1"><%= @schedule.errors[:start_time].first %></div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :end_time, '終了日時', class: 'form-label' %>
+    <%= form.text_field :end_time, class: 'form-control datepicker', required: true %>
+    <% if @schedule.errors[:end_time].any? %>
+      <div class="text-danger small mt-1"><%= @schedule.errors[:end_time].first %></div>
+    <% end %>
+  </div>
+
+  <div class="form-check mb-3">
+    <%= form.check_box :all_day, class: 'form-check-input' %>
+    <%= form.label :all_day, '終日', class: 'form-check-label' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, 'メモ', class: 'form-label' %>
+    <%= form.text_area :description, class: 'form-control', rows: 4, maxlength: 500 %>
+    <% if @schedule.errors[:description].any? %>
+      <div class="text-danger small mt-1"><%= @schedule.errors[:description].first %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit submit_label || '保存', class: 'btn btn-primary' %>
+    <%= link_to '一覧に戻る', schedules_path, class: 'btn btn-secondary ms-2' %>
+  </div>
+<% end %>

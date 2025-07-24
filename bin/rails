@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+# モンキーパッチ: Logger が未定義の場合に標準ライブラリの Logger を割り当てる
+require 'logger'
+Logger = ::Logger unless defined?(Logger)
+
+APP_PATH = File.expand_path('../config/application', __dir__)
+require_relative '../config/boot'
+require 'rails/commands'
+
+
+

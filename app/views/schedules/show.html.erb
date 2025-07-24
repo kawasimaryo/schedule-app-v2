@@ -1,0 +1,31 @@
+<h1 class="mb-4">スケジュール詳細</h1>
+
+<div class="mb-3">
+  <strong>タイトル:</strong>
+  <div><%= @schedule.title %></div>
+</div>
+
+<div class="mb-3">
+  <strong>開始日:</strong>
+  <div><%= @schedule.start_time.strftime("%Y/%m/%d") %></div>
+</div>
+
+<div class="mb-3">
+  <strong>終了日:</strong>
+  <div><%= @schedule.end_time.strftime("%Y/%m/%d") %></div>
+</div>
+
+<div class="mb-3">
+  <strong>終日:</strong>
+  <div><%= @schedule.all_day ? "○" : "" %></div>
+</div>
+
+<div class="mb-3">
+  <strong>メモ:</strong>
+  <div class="border p-2"><%= simple_format(@schedule.description) %></div>
+</div>
+
+<div class="mt-4">
+  <%= link_to '編集', edit_schedule_path(@schedule), class: 'btn btn-warning' %>
+  <%= link_to '一覧に戻る', schedules_path, class: 'btn btn-secondary ms-2' %>
+</div>
